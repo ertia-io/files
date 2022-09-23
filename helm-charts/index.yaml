@@ -1,0 +1,18 @@
+apiVersion: v1
+entries:
+  database:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-09-23T23:13:58.091911399+02:00"
+    dependencies:
+    - name: yugabyte
+      repository: ""
+      version: 2.12.1
+    description: A Helm chart for setting up database
+    digest: 989bfa25619f1e40938a35782dfe68c3859495cdb4176850d6a5d99ebd658f9e
+    name: database
+    type: application
+    urls:
+    - https://ertia-io.github.io/files/helm-charts/database-0.0.1.tgz
+    version: 0.0.1
+generated: "2022-09-23T23:13:58.090472833+02:00"
