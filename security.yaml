@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tekton-deployer
+  labels:
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/part-of: tekton-deployer
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tekton-deployer
+  namespace: tekton-deployer
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kube-api-secret
+  namespace: tekton-deployer
+  annotations:
+    kubernetes.io/service-account.name: tekton-deployer
+type: kubernetes.io/service-account-token
+
+---
+
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: tekton-deployer-role
+  namespace: tekton-deployer
+rules:
+- apiGroups: [""]
+  resources: ["services","secrets"]
+  verbs: ["get", "create", "update", "patch","list"]
+- apiGroups: ["apps"]
+  resources: ["deployments","statefulsets"]
+  verbs: ["get", "create", "update", "patch"]
+- apiGroups: ["policy"]
+  resources: ["poddisruptionbudgets"]
+  verbs: ["get", "create", "update", "patch"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: tekton-deployer-role-binding2
+  namespace: tekton-deployer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: tekton-deployer-role
+subjects:
+- kind: ServiceAccount
+  name: tekton-deployer

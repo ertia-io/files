@@ -1,0 +1,27 @@
+HTTP/1.1 200 OK
+Content-Type: text/yaml; charset=UTF-8
+Server: netcat!
+
+# example upgrade from repo
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: test4
+spec:
+  serviceAccountName: tekton-deployer
+  taskRef:
+    name: helm-upgrade-from-repo
+    kind: ClusterTask 
+  params:
+  - name: chart_name
+    value: yugabyte/yugabyte
+  - name: helm_repo
+    value: https://charts.yugabyte.com
+  - name: release_version
+    value: v1.0.0
+  - name: release_name
+    value: helm-repo-sample
+  - name: release_namespace
+    value: tekton-deployer
+  - name: overwrite_values
+    value: autoscaling.enabled=true,autoscaling.maxReplicas=3
