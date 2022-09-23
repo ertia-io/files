@@ -1,4 +1,4 @@
 resources:
- - url: https://ertia-io.github.io/files/core/tekton-deployer.yaml
- - url: https://ertia-io.github.io/files/core/tekton-helm.yaml
- - url: https://ertia-io.github.io/files/core/tekton-yaml.yaml
+  - url: "https://ertia-io.github.io/files/core/tekton-deployer.yaml"
+  - url: "https://ertia-io.github.io/files/core/tekton-helm.yaml"
+  - url: "https://ertia-io.github.io/files/core/tekton-yaml.yaml"
