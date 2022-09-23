@@ -1,7 +1,4 @@
-HTTP/1.1 200 OK
-Content-Type: text/yaml; charset=UTF-8
-Server: netcat!
-
+---
 # example upgrade from repo
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
