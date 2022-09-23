@@ -1,2 +1,4 @@
-resources:
-  - url: "https://ertia-io.github.io/files/components/yugabyte/deployment.yaml"
+--- 
+resources: 
+  - 
+    url: "https://ertia-io.github.io/files/components/yugabyte/deployment.yaml"
