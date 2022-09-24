@@ -2,3 +2,4 @@
 resources: 
   - 
     url: "https://ertia-io.github.io/files/components/yugabyte/deployment.yaml"
+    namespace: tekton-deployer

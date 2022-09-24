@@ -2,8 +2,11 @@
 resources: 
   - 
     url: "https://ertia-io.github.io/files/core/tekton-deployer.yaml"
+    namespace: tekton-deployer
   - 
     url: "https://ertia-io.github.io/files/core/tekton-helm.yaml"
+    namespace: tekton-deployer
   - 
     url: "https://ertia-io.github.io/files/core/tekton-yaml.yaml"
+    namespace: tekton-deployer
 
