@@ -4,6 +4,7 @@ apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
   generateName: yugabyte-frugal-
+  name: yugabyte-frugal
 spec:
   serviceAccountName: tekton-deployer
   taskRef:
