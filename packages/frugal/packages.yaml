@@ -3,3 +3,6 @@ resources:
   - 
     url: "https://ertia-io.github.io/files/components/yugabyte/deployment-local.yaml"
     namespace: tekton-deployer
+  -
+    url: "http://ertia-io.github.io/files/components/arangodb/deployment.yaml"
+    namespace: tekton-deployer
