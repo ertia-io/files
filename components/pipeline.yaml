@@ -28,9 +28,6 @@ spec:
         taskRef:
           name: helm-upgrade-from-repo
           kind: ClusterTask
-        taskSpec:
-          results:
-            - name: monitoring-done
 
       - name: yugabyte-install
         params:
