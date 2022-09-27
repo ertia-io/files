@@ -7,5 +7,5 @@ resources:
     url: http://ertia-io.github.io/files/components/arangodb/dev.yaml
     namespace: tekton-deployer
   -
-    url: http://ertia-io.github.io/files/components/zitaldel/dev.yaml
+    url: http://ertia-io.github.io/files/components/zitadel/dev.yaml
     namespace: tekton-deployer

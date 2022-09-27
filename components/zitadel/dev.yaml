@@ -4,6 +4,7 @@ apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
   name: zitadel-install
+  generateName: zitadel-install-
 spec:
   serviceAccountName: tekton-deployer
   taskRef:
