@@ -6,10 +6,6 @@ metadata:
 spec:
   serviceAccountName: tekton-deployer
   pipelineSpec:
-    workspaces:
-      - name: source
-        description: |
-          tekton workspace
     tasks:
       - name: monitoring
         params:
