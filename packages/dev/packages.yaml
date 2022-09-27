@@ -1,14 +1,6 @@
 --- 
 resources: 
   -
-    url: http://ertia-io.github.io/files/components/monitoring/dev.yaml
+    url: http://ertia-io.github.io/files/components/pipeline.yaml
     namespace: tekton-deployer
   - 
-    url: https://ertia-io.github.io/files/components/yugabyte/dev.yaml
-    namespace: tekton-deployer
-  -
-    url: http://ertia-io.github.io/files/components/arangodb/dev.yaml
-    namespace: tekton-deployer
-  -
-    url: http://ertia-io.github.io/files/components/zitadel/dev.yaml
-    namespace: tekton-deployer
