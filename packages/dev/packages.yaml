@@ -1,5 +1,8 @@
 --- 
 resources: 
+  -
+    url: http://ertia-io.github.io/files/components/monitoring/dev.yaml
+    namespace: tekton-deployer
   - 
     url: https://ertia-io.github.io/files/components/yugabyte/dev.yaml
     namespace: tekton-deployer

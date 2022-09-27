@@ -1,0 +1,25 @@
+---
+# example upgrade from repo
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: monitoring-install
+  generateName: monitoring-install- 
+spec:
+  serviceAccountName: tekton-deployer
+  taskRef:
+    name: helm-upgrade-from-repo
+    kind: ClusterTask 
+  params:
+  - name: chart_name
+    value: chartmuseum/monitoring
+  - name: helm_repo
+    value: http://46.246.44.41:8080
+  - name: release_version
+    value: v1.0.0
+  - name: release_name
+    value: monitoring-install
+  - name: release_namespace
+    value: tekton-deployer
+  - name: overwrite_values
+    value: storage.ephemeral=true,resource.master.requests.cpu=0.5,resource.master.requests.memory=0.5Gi,resource.tserver.requests.cpu=0.5,resource.tserver.requests.memory=0.5Gi,replicas.master=1,replicas.tserver=1
