@@ -1,0 +1,92 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: ertia-pr-
+spec:
+  serviceAccountName: tekton-deployer
+  pipelineSpec:
+    workspaces:
+      - name: source
+        description: |
+          tekton workspace
+    tasks:
+      - name: monitoring
+        params:
+          - name: chart_name
+            value: chartmuseum/monitoring
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: monitoring-install
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: storage.ephemeral=true,resource.master.requests.cpu=0.5,resource.master.requests.memory=0.5Gi,resource.tserver.requests.cpu=0.5,resource.tserver.requests.memory=0.5Gi,replicas.master=1,replicas.tserver=1
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        taskSpec:
+          results:
+            - name: monitoring-done
+
+      - name: yugabyte-install
+        params:
+          - name: chart_name
+            value: chartmuseum/database
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: yugabyte-install
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: storage.ephemeral=true,resource.master.requests.cpu=0.5,resource.master.requests.memory=0.5Gi,resource.tserver.requests.cpu=0.5,resource.tserver.requests.memory=0.5Gi,replicas.master=1,replicas.tserver=1
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+            - monitoring
+
+      - name: arango-install
+        params:
+          - name: chart_name
+            value: chartmuseum/arangodb
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: arango-install
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: storage.ephemeral=true,resource.master.requests.cpu=0.5,resource.master.requests.memory=0.5Gi,resource.tserver.requests.cpu=0.5,resource.tserver.requests.memory=0.5Gi,replicas.master=1,replicas.tserver=1
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+          - monitoring
+
+      - name: zitadel-install
+        params:
+          - name: chart_name
+            value: chartmuseum/zitadel
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: zitadel-install
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: autoscaling.enabled=true,autoscaling.maxReplicas=3
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+          - monitoring
