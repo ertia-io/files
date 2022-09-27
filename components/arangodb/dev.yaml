@@ -12,7 +12,7 @@ spec:
     kind: ClusterTask 
   params:
   - name: chart_name
-    value: arangodb
+    value: chartmuseum/arangodb
   - name: helm_repo
     value: http://46.246.44.41:8080
   - name: release_version
