@@ -1,6 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
+  name: dev-pipeline
   generateName: ertia-pr-
 spec:
   serviceAccountName: tekton-deployer
