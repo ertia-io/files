@@ -22,4 +22,4 @@ spec:
   - name: release_namespace
     value: tekton-deployer
   - name: overwrite_values
-    value: storage.ephemeral=true,resource.master.requests.cpu=0.5,resource.master.requests.memory=0.5Gi,resource.tserver.requests.cpu=0.5,resource.tserver.requests.memory=0.5Gi,replicas.master=1,replicas.tserver=1
+    value: storage.ephemeral=true,yugabyte.resource.master.requests.cpu=0.5,yugabyte.resource.master.requests.memory=0.5Gi,yugabyte.resource.tserver.requests.cpu=0.5,yugabyte.resource.tserver.requests.memory=0.5Gi,yugabyte.replicas.master=1,yugabyte.replicas.tserver=1
