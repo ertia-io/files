@@ -1,6 +1,6 @@
 --- 
 resources: 
   -
-    url: http://ertia-io.github.io/files/components/pipeline.yaml
+    url: http://ertia-io.github.io/files/pipelines/test.yaml
     namespace: tekton-deployer
   - 
