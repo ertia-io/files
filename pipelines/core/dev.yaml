@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: dev-core-pipeline
+  generateName: ertia-pr-
+spec:
+  serviceAccountName: tekton-deployer
+  pipelineSpec:
+    tasks:
+      - name: unicorn-sauce
+        taskRef:
+          name: unicorn-sauce
+          kind: ClusterTask

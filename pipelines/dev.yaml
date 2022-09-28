@@ -19,6 +19,8 @@ spec:
         params:
           - name: secretName
             value: traefik
+        runAfter:
+            - unicorn-sauce
        
       - name: traefik
         params:
@@ -37,6 +39,9 @@ spec:
         taskRef:
           name: helm-upgrade-from-repo
           kind: ClusterTask
+        runAfter:
+            - traefik-secret
+
       - name: monitoring
         params:
           - name: chart_name
