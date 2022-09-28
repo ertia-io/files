@@ -140,3 +140,63 @@ spec:
           kind: ClusterTask
         runAfter:
           - monitoring
+
+      - name: git
+        params:
+          - name: chart_name
+            value: chartmuseum/git
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: git
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: ""
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+          - monitoring
+
+      - name: messaging
+        params:
+          - name: chart_name
+            value: chartmuseum/messaging
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: messaging
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: ""
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+          - monitoring
+
+      - name: registry
+        params:
+          - name: chart_name
+            value: chartmuseum/registry
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: registry
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: ""
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+          - monitoring
