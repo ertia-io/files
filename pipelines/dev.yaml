@@ -101,7 +101,7 @@ spec:
           kind: ClusterTask
         runAfter:
           - monitoring
-      - name: traefik
+      - name: mesh 
         params:
           - name: chart_name
             value: chartmuseum/mesh
