@@ -30,5 +30,5 @@ spec:
       script: |
 
         kubectl -n $(params.nameSpace) create secret generic unicorn-sauce \
-          --from-literal=magic="$(strings /dev/urandom | grep -o '[[:alnum:]]' | head -n 30 | tr -d '\n'; echo)"
+          --from-literal=magic="$(strings /dev/urandom | grep -o '[[:alnum:]]' | head -n 100 | tr -d '\n'; echo)"
 
