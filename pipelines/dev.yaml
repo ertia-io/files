@@ -104,7 +104,7 @@ spec:
       - name: mesh 
         params:
           - name: chart_name
-            value: chartmuseum/mesh
+            value: chartmuseum/traefik-mesh
           - name: helm_repo
             value: http://46.246.44.41:8080
           - name: release_version
