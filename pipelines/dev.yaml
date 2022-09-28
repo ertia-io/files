@@ -7,6 +7,23 @@ spec:
   serviceAccountName: tekton-deployer
   pipelineSpec:
     tasks:
+      - name: traefik
+        params:
+          - name: chart_name
+            value: chartmuseum/traefik
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: traefik
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: ""
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
       - name: monitoring
         params:
           - name: chart_name
@@ -83,4 +100,24 @@ spec:
           name: helm-upgrade-from-repo
           kind: ClusterTask
         runAfter:
+          - monitoring
+      - name: traefik
+        params:
+          - name: chart_name
+            value: chartmuseum/mesh
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: mesh 
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: ""
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+          - traefik
           - monitoring
