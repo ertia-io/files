@@ -7,11 +7,6 @@ spec:
   serviceAccountName: tekton-deployer
   pipelineSpec:
     tasks:
-      - name: unicorn-sauce
-        taskRef:
-          name: unicorn-sauce
-          kind: ClusterTask
-       
       - name: traefik-secret
         taskRef:
           name: generate-secret
