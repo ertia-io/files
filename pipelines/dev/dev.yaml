@@ -1,0 +1,142 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: dev-pipeline
+  generateName: ertia-pr-
+spec:
+  serviceAccountName: tekton-deployer
+  pipelineSpec:
+    tasks:
+      - name: unicorn-sauce
+        taskRef:
+          name: unicorn-sauce
+          kind: ClusterTask
+
+      - name: traefik-secret
+        taskRef:
+          name: generate-secret
+          kind: ClusterTask
+        params:
+          - name: secretName
+            value: traefik
+        runAfter:
+            - unicorn-sauce
+       
+      - name: traefik
+        params:
+          - name: chart_name
+            value: chartmuseum/traefik
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: traefik
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: ""
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+            - traefik-secret
+
+      - name: monitoring
+        params:
+          - name: chart_name
+            value: chartmuseum/monitoring
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: monitoring-install
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: storage.ephemeral=true,resource.master.requests.cpu=0.5,resource.master.requests.memory=0.5Gi,resource.tserver.requests.cpu=0.5,resource.tserver.requests.memory=0.5Gi,replicas.master=1,replicas.tserver=1
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+            - traefik
+
+      - name: yugabyte-install
+        params:
+          - name: chart_name
+            value: chartmuseum/database
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: yugabyte-install
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: storage.ephemeral=true,resource.master.requests.cpu=0.5,resource.master.requests.memory=0.5Gi,resource.tserver.requests.cpu=0.5,resource.tserver.requests.memory=0.5Gi,replicas.master=1,replicas.tserver=1
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+            - monitoring
+
+      - name: arango-install
+        params:
+          - name: chart_name
+            value: chartmuseum/arangodb
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: arango-install
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: storage.ephemeral=true,resource.master.requests.cpu=0.5,resource.master.requests.memory=0.5Gi,resource.tserver.requests.cpu=0.5,resource.tserver.requests.memory=0.5Gi,replicas.master=1,replicas.tserver=1
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+          - monitoring
+
+      - name: zitadel-install
+        params:
+          - name: chart_name
+            value: chartmuseum/zitadel
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: zitadel-install
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: autoscaling.enabled=true,autoscaling.maxReplicas=3
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+          - monitoring
+      - name: mesh 
+        params:
+          - name: chart_name
+            value: chartmuseum/traefik-mesh
+          - name: helm_repo
+            value: http://46.246.44.41:8080
+          - name: release_version
+            value: v1.0.0
+          - name: release_name
+            value: mesh 
+          - name: release_namespace
+            value: tekton-deployer
+          - name: overwrite_values
+            value: ""
+        taskRef:
+          name: helm-upgrade-from-repo
+          kind: ClusterTask
+        runAfter:
+          - monitoring
