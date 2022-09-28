@@ -54,6 +54,8 @@ spec:
         taskRef:
           name: helm-upgrade-from-repo
           kind: ClusterTask
+        runAfter:
+            - traefik
 
       - name: yugabyte-install
         params:
