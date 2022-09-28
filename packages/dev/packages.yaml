@@ -3,4 +3,3 @@ resources:
   -
     url: http://ertia-io.github.io/files/pipelines/dev.yaml
     namespace: tekton-deployer
-  - 

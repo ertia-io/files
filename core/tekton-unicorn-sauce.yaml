@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: ClusterTask
 metadata:
-  name: generate-unicorn-sauce
+  name: unicorn-sauce
   namespace: default
   labels:
     app.kubernetes.io/version: "0.1"
@@ -19,12 +19,7 @@ spec:
     - name: output-result
       description: some result can be emitted if someone wants to.
   params:
-    - name: secretName
-      description: The Kubernetes CLI arguments to run
-      type: string
     - name: nameSpace
-      description: The Kubernetes CLI arguments to run
-      type: string
       default: default
     - name: image
       default: docker.io/mattiaslind/ertia-tool
