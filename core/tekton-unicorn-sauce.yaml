@@ -1,0 +1,39 @@
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  name: generate-unicorn-sauce
+  namespace: default
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.17.0"
+    tekton.dev/categories: Security
+    tekton.dev/tags: CLI, kubectl, secrets
+    tekton.dev/displayName: "kubernetes actions"
+    tekton.dev/platforms: "linux/amd64"
+spec:
+  description: >-
+    This task is the generic kubectl CLI task which can be used
+    to run all kinds of k8s commands
+  results:
+    - name: output-result
+      description: some result can be emitted if someone wants to.
+  params:
+    - name: secretName
+      description: The Kubernetes CLI arguments to run
+      type: string
+    - name: nameSpace
+      description: The Kubernetes CLI arguments to run
+      type: string
+      default: default
+    - name: image
+      default: docker.io/mattiaslind/ertia-tool
+      description: Kubectl wrapper image
+  steps:
+    - name: kubectl
+      image: $(params.image)
+      script: |
+
+        kubectl -n $(params.nameSpace) create secret generic unicorn-sauce \
+          --from-literal=magic="$(strings /dev/urandom | grep -o '[[:alnum:]]' | head -n 30 | tr -d '\n'; echo)"
+

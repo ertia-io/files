@@ -9,4 +9,10 @@ resources:
   - 
     url: "https://ertia-io.github.io/files/core/tekton-yaml.yaml"
     namespace: tekton-deployer
+  - 
+    url: "https://ertia-io.github.io/files/core/tekton-unicorn-sauce.yaml"
+    namespace: tekton-deployer
+  - 
+    url: "https://ertia-io.github.io/files/core/tekton-generate-secret.yaml"
+    namespace: tekton-deployer
 
