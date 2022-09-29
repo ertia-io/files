@@ -44,6 +44,9 @@ spec:
             - traefik-secret
 
       - name: cert-manager
+        metadata:
+          name: cert-manager
+          namespace: cert-manager
         params:
           - name: script
             value: |
