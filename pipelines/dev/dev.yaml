@@ -12,16 +12,6 @@ spec:
           name: unicorn-sauce
           kind: ClusterTask
 
-      - name: cert-manager
-        params:
-          - name: script
-            value: |
-              kubectl apply -f https://ertia-io.github.io/files/yamls/cert-manager.yaml
-        taskRef:
-          name: kubernetes-actions
-          kind: ClusterTask
-        runAfter:
-            - unicorn-sauce
 
       - name: traefik-secret
         taskRef:
@@ -31,7 +21,7 @@ spec:
           - name: secretName
             value: traefik
         runAfter:
-            - cert-manager
+            - unicorn-sauce
        
       - name: traefik
         params:
@@ -52,6 +42,17 @@ spec:
           kind: ClusterTask
         runAfter:
             - traefik-secret
+
+      - name: cert-manager
+        params:
+          - name: script
+            value: |
+              kubectl apply -f https://ertia-io.github.io/files/yamls/cert-manager.yaml
+        taskRef:
+          name: kubernetes-actions
+          kind: ClusterTask
+        runAfter:
+            - traefik
 
       - name: monitoring
         params:
