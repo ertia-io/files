@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: arangodb
-  labels:
-    app.kubernetes.io/name: kube-arangodb
-    app.kubernetes.io/instance: deployment
