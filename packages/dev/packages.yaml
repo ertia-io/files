@@ -1,20 +1,5 @@
 --- 
 resources: 
   -
-    url: "https://ertia-io.github.io/files/yaml/namespace.yaml"
-    namespace: tekton-deployer
-  -
-    url: "https://ertia-io.github.io/files/yaml/ertia-arango-crd.yaml"
-    namespace: tekton-deployer
-  -
-    url: "https://ertia-io.github.io/files/yaml/ertia-arango-deployment-replication.yaml"
-    namespace: tekton-deployer
-  -
-    url: "https://ertia-io.github.io/files/yaml/ertia-arango-deployment.yaml"
-    namespace: tekton-deployer
-  -
-    url: "https://ertia-io.github.io/files/yaml/ertia-arango-storage.yaml"
-    namespace: tekton-deployer
-  -
     url: "https://ertia-io.github.io/files/pipelines/dev/dev.yaml"
     namespace: tekton-deployer
