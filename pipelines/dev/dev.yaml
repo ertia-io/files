@@ -107,12 +107,13 @@ spec:
           - name: release_namespace
             value: tekton-deployer
           - name: overwrite_values
-            value: autoscaling.enabled=true,autoscaling.maxReplicas=3
+            value: ""
         taskRef:
           name: helm-upgrade-from-repo
           kind: ClusterTask
         runAfter:
           - monitoring
+
       - name: mesh 
         params:
           - name: chart_name
