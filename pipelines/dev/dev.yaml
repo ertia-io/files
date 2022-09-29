@@ -47,7 +47,7 @@ spec:
         params:
           - name: script
             value: |
-              kubectl apply -f https://ertia-io.github.io/files/yamls/cert-manager.yaml
+              kubectl apply -f https://ertia-io.github.io/files/yaml/cert-manager.yaml
         taskRef:
           name: kubernetes-actions
           kind: ClusterTask
